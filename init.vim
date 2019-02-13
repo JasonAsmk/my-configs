@@ -16,9 +16,10 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'mhinz/vim-grepper.git'
 Plugin 'mhinz/vim-signify.git'
 Plugin 'neovimhaskell/haskell-vim.git'
-Plugin 'parsonsmatt/intero-neovim.git'
+" Plugin 'parsonsmatt/intero-neovim.git'
 Plugin 'alx741/vim-hindent.git'
 Plugin 'alx741/vim-stylishask.git'
+Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plugin 'godlygeek/tabular.git'
 Plugin 'dan-t/vim-hsimport.git'
 Plugin 'tpope/vim-fugitive.git'
@@ -86,43 +87,43 @@ let g:haskell_indent_in = 1
 let g:haskell_indent_guard = 2
 let g:haskell_indent_case_alternative = 1
 let g:cabal_indent_section = 2
-let g:intero_start_immediately = 1
+" let g:intero_start_immediately = 1
 
-let g:intero_use_neomake = 0
+" let g:intero_use_neomake = 0
+" let g:intero_backend = {'command': 'stack ghci' }
 
 " neovim intero options
 " Automatically reload on save
-au BufWritePost *.hs InteroReload
-
+" au BufWritePost *.hs InteroReload
 " Lookup the type of expression under the cursor
-au FileType haskell nmap <silent> <leader>t <Plug>InteroGenericType
-au FileType haskell nmap <silent> <leader>T <Plug>InteroType
+" au FileType haskell nmap <silent> <leader>t <Plug>InteroGenericType
+" au FileType haskell nmap <silent> <leader>T <Plug>InteroType
 " Insert type declaration
-au FileType haskell nnoremap <silent> <leader>ni :InteroTypeInsert<CR>
+" au FileType haskell nnoremap <silent> <leader>ni :InteroTypeInsert<CR>
 " Show info about expression or type under the cursor
-au FileType haskell nnoremap <silent> <leader>i :InteroInfo<CR>
+" au FileType haskell nnoremap <silent> <leader>i :InteroInfo<CR>
 
 " Open/Close the Intero terminal window
-au FileType haskell nnoremap <silent> <leader>nn :InteroOpen<CR>
-au FileType haskell nnoremap <silent> <leader>nh :InteroHide<CR>
+" au FileType haskell nnoremap <silent> <leader>nn :InteroOpen<CR>
+" au FileType haskell nnoremap <silent> <leader>nh :InteroHide<CR>
 
 " Reload the current file into REPL
-au FileType haskell nnoremap <silent> <leader>nf :InteroLoadCurrentFile<CR
+" au FileType haskell nnoremap <silent> <leader>nf :InteroLoadCurrentFile<CR
 " Jump to the definition of an identifier
-au FileType haskell nnoremap <silent> <leader>ng :InteroGoToDef<CR>
+" au FileType haskell nnoremap <silent> <leader>ng :InteroGoToDef<CR>
 " Evaluate an expression in REPL
-au FileType haskell nnoremap <silent> <leader>ne :InteroEval<CR>
+" au FileType haskell nnoremap <silent> <leader>ne :InteroEval<CR>
 
 " Start/Stop Intero
-au FileType haskell nnoremap <silent> <leader>ns :InteroStart<CR>
-au FileType haskell nnoremap <silent> <leader>nk :InteroKill<CR>
+" au FileType haskell nnoremap <silent> <leader>ns :InteroStart<CR>
+" au FileType haskell nnoremap <silent> <leader>nk :InteroKill<CR>
 
 " Reboot Intero, for when dependencies are added
-au FileType haskell nnoremap <silent> <leader>nr :InteroKill<CR> :InteroOpen<CR>
+" au FileType haskell nnoremap <silent> <leader>nr :InteroKill<CR> :InteroOpen<CR>
 
 " Managing targets
 " Prompts you to enter targets (no silent):
-au FileType haskell nnoremap <leader>nt :InteroSetTargets<CR>
+" au FileType haskell nnoremap <leader>nt :InteroSetTargets<CR>
 
 " check file on save and open issues automatically
 "call neomake#configure#automake('w')
@@ -142,6 +143,12 @@ au FileType haskell nnoremap <silent> <leader>ims :HsimportSymbol<CR>
 " get the whole module
 au FileType haskell nnoremap <silent> <leader>imm :HsimportModule<CR>
 
+" ghcid fake type hack helper
+" identifier under cursor
+au FileType haskell nmap <silent> <leader>t bi(<esc>ea::())
+" smallest parenthesized subexpression under the cursor
+au FileType haskell nmap <silent> <leader>T ?(<CR>i(<ESC>l%i)::_
+
 " enable deoplete for mhartington's vim ts plugin
 let g:deoplete#enable_at_startup = 1
 
@@ -153,6 +160,7 @@ let g:ale_linters_ignore = {'haskell': ['stack_ghc']}
 let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 0
 let g:ale_set_signs = 0
+nnoremap <silent> <leader>f :ALEFix<CR>
 
 " hindent don't format on save
 let g:hindent_on_save = 0
@@ -171,7 +179,7 @@ let g:nvim_typescript#vue_support = 1
 " with :Errors
 let g:nvim_typescript#diagnostics_enable = 0
 au FileType typescript nnoremap <silent> <leader>t :TSType<CR>
-au FileType typescript nnoremap <silent> <leader>i :TSImport
+au FileType typescript nnoremap <silent> <leader>i :TSImport<CR>
 " let $NVIM_NODE_LOG_FILE='nvim-node.log'
 " let $NVIM_NODE_LOG_LEVEL='warn'
 
@@ -194,6 +202,10 @@ let g:grepper.quickfix = 0
 
 " set system clipboard to default yank
 set clipboard=unnamedplus
+
+" Add spaces after comment delimiters
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
 
 " Check if NERDTree is open or active
 function! IsNERDTreeOpen()        
@@ -232,7 +244,8 @@ set nowrap
 
 " colorscheme happy_hacking
 " colorscheme challenger_deep
-colorscheme default
+" colorscheme default
+colorscheme OceanicNextLight
 
 " gutter colors
 hi clear SignColumn
