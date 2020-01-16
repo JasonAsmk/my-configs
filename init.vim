@@ -36,7 +36,9 @@ Plugin 'vim-airline/vim-airline.git'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'rafi/awesome-vim-colorschemes.git'
 Plugin 'yssl/QFEnter.git'
-
+Plugin 'editorconfig/editorconfig-vim.git'
+Plugin 'supercollider/scvim.git'
+Plugin 'tidalcycles/vim-tidal.git'
 Plugin 'posva/vim-vue.git'
 "" ***** END PLUGINS *****
 
@@ -237,7 +239,7 @@ set autoindent
 set expandtab
 set shiftwidth=2
 set softtabstop=2
-set background=dark
+set background=light
 set laststatus=0
 set mouse=a
 set nowrap
@@ -245,7 +247,8 @@ set nowrap
 " colorscheme happy_hacking
 " colorscheme challenger_deep
 " colorscheme default
-colorscheme OceanicNextLight
+" colorscheme OceanicNextLight
+colorscheme lucius
 
 " gutter colors
 hi clear SignColumn
