@@ -1,20 +1,23 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="/opt/local/bin:/opt/local/sbin:/opt/local/Library/Frameworks/Python.framework/Versions/3.6/bin/:/Users/JasonAsmk/.cabal/bin/:~/.local/bin/:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/JasonAsmk/.oh-my-zsh
+export ZSH=/home/jasonasmk/.oh-my-zsh
 
-
-#cowsay
-fortune | cowsay
-export CLICOLOR=1
-export TERM=xterm-256color
+export ANDROID_HOME=/home/jasonasmk/Android/Sdk
+export PATH=$ANDROID_HOME/platform-tools:$PATH
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -58,7 +61,9 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,17 +95,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="mvim -v"
-export NVM_DIR="/Users/JasonAsmk/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export ANDROID_HOME=/Users/JasonAsmk/Library/Android/sdk
-export PATH=$ANDROID_HOME/platform-tools:$PATH
-export PATH=$ANDROID_HOME/tools:$PATH
-export PATH=/Users/JasonAsmk/.nvm/versions/node/v7.10.0/bin:$PATH
-export JAVA_HOME=$(/usr/libexec/java_home)
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+source /usr/share/nvm/nvm.sh
+source /usr/share/nvm/bash_completion
+source /usr/share/nvm/install-nvm-exec
 
-#mutt
-export MUTT_EMAIL_ADDRESS="asimakopoulos.iason@gmail.com"
-export MUTT_REALNAME="Iason Asimakopoulos"
-export MUTT_SMTP_URL="smtp://asimakopoulos.iason@gmail.com@smtp.gmail.com:587/"
+
+# initialize Z (cd replacement)
+. /usr/share/z/z.sh
+
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+
+[ -f "/home/jasonasmk/.ghcup/env" ] && source "/home/jasonasmk/.ghcup/env" # ghcup-envsource /usr/share/nvm/init-nvm.sh
+source /usr/share/nvm/init-nvm.sh
