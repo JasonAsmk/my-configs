@@ -134,8 +134,8 @@ set nowrap
 " colorscheme lucius
 " colorscheme space-vim-dark
 set termguicolors
-colorscheme silverhand
-let g:airline_theme='cyberpunk'
+colorscheme github
+" let g:airline_theme='cyberpunk'
 
 " airline
 let g:airline#extensions#branch#format = 2
